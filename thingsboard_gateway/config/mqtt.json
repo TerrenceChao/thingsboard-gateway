@@ -2,14 +2,14 @@
   "broker": {
     "name": "Default Local Broker",
     "host": "127.0.0.1",
-    "port": 1883,
+    "port": 1884,
     "clientId": "ThingsBoard_gateway",
     "maxMessageNumberPerWorker": 10,
     "maxNumberOfWorkers": 100,
     "security": {
       "type": "basic",
-      "username": "user",
-      "password": "password"
+      "username": "",
+      "password": ""
     }
   },
   "mapping": [

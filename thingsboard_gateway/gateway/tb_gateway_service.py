@@ -35,6 +35,7 @@ from thingsboard_gateway.gateway.tb_client import TBClient
 from thingsboard_gateway.storage.file.file_event_storage import FileEventStorage
 from thingsboard_gateway.storage.memory.memory_event_storage import MemoryEventStorage
 from thingsboard_gateway.storage.sqlite.sqlite_event_storage import SQLiteEventStorage
+from thingsboard_gateway.storage.kafka.kafka_event_storage import KafkaEventStorage
 from thingsboard_gateway.tb_utility.tb_gateway_remote_configurator import RemoteConfigurator
 from thingsboard_gateway.tb_utility.tb_loader import TBModuleLoader
 from thingsboard_gateway.tb_utility.tb_logger import TBLoggerHandler
@@ -132,6 +133,7 @@ class TBGatewayService:
             "memory": MemoryEventStorage,
             "file": FileEventStorage,
             "sqlite": SQLiteEventStorage,
+            "kafka": KafkaEventStorage,
             }
         self.__gateway_rpc_methods = {
             "ping": self.__rpc_ping,
@@ -596,6 +598,11 @@ class TBGatewayService:
         return data
 
     def __send_data_pack_to_storage(self, data, connector_name):
+
+        log.info(' \n\n\n &&& [__send_data_pack_to_storage]')
+        log.info((connector_name, data))
+        log.info(' &&& [__send_data_pack_to_storage] \n\n\n ')
+
         json_data = dumps(data)
         save_result = self._event_storage.put(json_data)
         if not save_result:

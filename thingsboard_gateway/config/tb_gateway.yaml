@@ -1,5 +1,5 @@
 thingsboard:
-  host: thingsboard.cloud
+  host: localhost
   port: 1883
   remoteShell: false
   remoteConfiguration: false
@@ -8,12 +8,12 @@ thingsboard:
   checkConnectorsConfigurationInSeconds: 60
   handleDeviceRenaming: true
   security:
-    accessToken: PUT_YOUR_GW_ACCESS_TOKEN_HERE
+    accessToken: Q5YNCBEkVrsvMDkg1U3l
   qos: 1
 storage:
-  type: memory
-  read_records_count: 100
-  max_records_count: 100000
+  # type: memory
+  # read_records_count: 100
+  # max_records_count: 100000
 #  type: file
 #  data_folder_path: ./data/
 #  max_file_count: 10
@@ -23,6 +23,11 @@ storage:
 #  data_file_path: ./data/data.db
 #  messages_ttl_check_in_hours: 1
 #  messages_ttl_in_days: 7
+
+  type: kafka
+  broker_host: "localhost:9092"
+  topic_field: topic
+
 grpc:
   enabled: false
   serverPort: 9595
@@ -37,6 +42,15 @@ connectors:
     name: MQTT Broker Connector
     type: mqtt
     configuration: mqtt.json
+
+  -
+    name: OPC-UA Connector
+    type: opcua
+    configuration: opcua-1.json
+  -
+    name: OPC-UA Connector 02
+    type: opcua
+    configuration: opcua-2.json
 
 #  -
 #    name: Modbus Connector
