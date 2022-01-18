@@ -11,6 +11,10 @@ thingsboard:
     accessToken: Q5YNCBEkVrsvMDkg1U3l
   qos: 1
 storage:
+  type: kafka
+  broker_host: "localhost:9092"
+  topic_field: iot_gateway
+
   # type: memory
   # read_records_count: 100
   # max_records_count: 100000
@@ -24,9 +28,9 @@ storage:
 #  messages_ttl_check_in_hours: 1
 #  messages_ttl_in_days: 7
 
-  type: kafka
-  broker_host: "localhost:9092"
-  topic_field: topic
+  # type: kafka
+  # broker_host: "47.96.75.125:9092"
+  # topic_field: topic
 
 grpc:
   enabled: false

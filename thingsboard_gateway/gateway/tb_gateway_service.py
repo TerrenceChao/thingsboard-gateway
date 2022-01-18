@@ -598,11 +598,6 @@ class TBGatewayService:
         return data
 
     def __send_data_pack_to_storage(self, data, connector_name):
-
-        log.info(' \n\n\n &&& [__send_data_pack_to_storage]')
-        log.info((connector_name, data))
-        log.info(' &&& [__send_data_pack_to_storage] \n\n\n ')
-
         json_data = dumps(data)
         save_result = self._event_storage.put(json_data)
         if not save_result:

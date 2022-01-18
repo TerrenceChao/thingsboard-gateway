@@ -35,18 +35,14 @@ class KafkaEventStorage(EventStorage):
 
 
     def put(self, event):
-        log.debug("\n\n\n &&& Kafka [put]")
-        log.debug(event)
-        log.debug("&&& Kafka [put]\n\n\n ")
-        
-        print("\n\n\n &&& Kafka [put]")
-        print(event)
-        print("&&& Kafka [put]\n\n\n ")
 
         try:
             if not self.__stopped:
-                print("Sending data to storage")
-                log.info("Sending data to storage")
+                log.info("Sending data to Kafka")
+                log.debug(event)
+                print("Sending data to Kafka")
+                print(event)
+
                 self.send(event)
                 return True
             else:
@@ -75,3 +71,7 @@ class KafkaEventStorage(EventStorage):
 
     def send(self, event):
         self.producer.send(self.settings.topic, event.encode("utf-8"))
+        
+        ## DEBUG MODE
+        log.debug("&&& Kafka: data sent\n\n\n ")
+        print("&&& Kafka: data sent\n\n\n ")
