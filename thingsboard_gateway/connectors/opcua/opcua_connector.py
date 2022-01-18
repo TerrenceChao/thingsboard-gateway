@@ -19,6 +19,7 @@ from copy import deepcopy
 from random import choice
 from string import ascii_lowercase
 from threading import Thread
+from cachetools import cached, TTLCache
 
 import regex
 from simplejson import dumps
@@ -507,6 +508,7 @@ class OpcUaConnector(Thread, Connector):
                 log.error("Device node not found with expression: %s", TBUtility.get_value(device["deviceNodePattern"], get_tag=True))
         return result
 
+    @cached(cache=TTLCache(maxsize=1000, ttl=10 * 60))
     def get_node_path(self, node: Node):
         return '\\.'.join(node.get_browse_name().Name for node in node.get_path(200000))
 
